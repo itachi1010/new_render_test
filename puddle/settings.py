@@ -89,6 +89,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+#testing
 
 
 # Password validation
