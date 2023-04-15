@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 #This was done to load static files for development
-#from django.conf import settings
-#from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls.static import static
 #change it later
 from django.contrib import admin
 from django.urls import path,include
@@ -28,10 +28,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/',include('dashboard.urls')),
     
-]
-#+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 #i added this above + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+# i added this recently to check how to fix static files
+if settings.DEBUG: #add this
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
