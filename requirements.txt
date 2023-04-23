@@ -14,7 +14,7 @@ jmespath
 pathspec
 Pillow
 psycopg2
-pypiwin32
+
 python-dateutil
 python-decouple
 pywin32
