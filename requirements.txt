@@ -23,3 +23,15 @@ tzdata==2022.7
 urllib3==1.26.15
 wcwidth==0.1.9
 whitenoise==6.4.0
+Django
+asgiref
+sqlparse
+typing_extensions
+tzdata
+Pillow
+python-decouple
+whitenoise
+gunicorn
+psycopg2
+dj-database-url
+django-crispy-forms
