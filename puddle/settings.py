@@ -27,6 +27,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+
+# USE LOCAL STORAGE
+TRY_LOCAL_STORAGE_ = bool(int(config('TRY_LOCAL_STORAGE_', 0)))
+TRY_LOCAL_DB_ = bool(int(config('TRY_LOCAL_DB_', 0)))
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost','bennyshopingsite.onrender.com']
@@ -56,16 +61,21 @@ INSTALLED_APPS = [
 
 ]
 
+
+if not TRY_LOCAL_STORAGE_:
+    INSTALLED_APPS.append('cloudinary')
+    INSTALLED_APPS.append('cloudinary_storage')
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'puddle.urls'
@@ -73,7 +83,7 @@ ROOT_URLCONF = 'puddle.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [] ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,7 +108,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
+
 
 DATABASES = {
     'default': {
@@ -107,16 +117,16 @@ DATABASES = {
     }
 }
 
-
+'''
 
 #testing
-'''
+
 
 DATABASES = {
     'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -151,6 +161,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media'),
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
